@@ -1,0 +1,193 @@
+<html>
+<body background="background.jpg">
+<h1 style="font-family:verdana,serif;color:Purple;text-align:center" >A heading</h1>
+<p style="font-family:arial,serif;color:Red;font-size:20px;">A paragraph.</p>
+<br />
+
+<strong>This is strong</strong>
+<br />
+
+<small>This is small</small>
+<br />
+
+<i>This is i</i>
+<br />
+
+This text contains<sub>superscript</sub>
+<h1> <a href="https://acm.sicnu.edu.cn/" style="text-decoration:none" target="_blank"><strong>sicnu oj</strong></a></h1>
+<bdo dir="ltr">Here is some text</bdo>
+<br />
+
+<p><dfn title="World Health Organization"><a href="https://www.who.int/" style="text-decoration:none;font-family:verdana;color:PowderBlue" target="_blank">WHO</a></dfn> 成立于 1948 年。</p>
+<br />
+
+<p><a name="tips">基本注意事项</a><br><a href="#tips">有用的提示</a></p>
+<br />
+
+<p>这是steam链接：<a href="https://store.steampowered.com/" style="text-decoration:none;color:Purple" target="_blank">welcome to STEAM</a></p>
+<br />
+
+<p>
+<pre style="font-family:'Courier New', Courier, monospace;color:brown;width:0vmax">
+        while(true)
+            System.out.println("Hello World!");
+    </pre>
+</p>
+<br />
+
+<p style="font-size:20;">
+    这是一个山羊图<a href="https://baike.baidu.com/item/%E5%B1%B1%E7%BE%8A/620683?fr=aladdin" target="_blank"><img src="goat.jpg" width="30" height="30" alt=""></a>
+</p>
+<br />
+
+<p style="font-size:25;">
+    这是期末成绩表:
+<table  frame="box" border="1">
+    <tr>
+        <td>姓名</td>
+        <td>数学</td>
+        <td>语文</td>
+        <td>英语</td>
+    </tr>
+    <tr style="text-align:right">
+        <td>张三</td>
+        <td>90</td>
+        <td>85</td>
+        <td>90</td>
+    </tr>
+    <tr style="text-align:right">
+        <td>&nbsp;</td>
+        <td>100</td>
+        <td>90</td>
+        <td>85</td>
+    </tr>
+</table>
+</p>
+<br />
+
+<style>.programming {
+    background-color:PowderBlue;
+    color:white;
+    margin:20px;
+    padding:20px;
+}
+</style>
+<div class="programming">
+    <h2>
+        c语言求1-100的和
+    </h2>
+    <pre style="font-size:40">
+        #include "stdio.h"
+        int main()
+        {
+            int i;
+            int sum=0;
+            for(i=0;i&lt;=100;i++)
+            {
+                sum+=i;
+            }
+            printf("%d\n",sum);
+
+            return 0;
+        }
+    </pre>
+</div>
+<br />
+
+<style>.background {
+    background:"bg_1.jpg";
+    color:deeppink;
+    margin:60px;
+    padding:60px;
+    font-size:50;
+}
+</style>
+<div class="background">
+    <pre>
+        #include "stdio.h"
+        int main(){
+            printf("Hello World!\n");
+            return 0;
+        }
+    </pre>
+</div>
+<br />
+
+<form  action="http://poj.org/" target="_blank" >
+    <fieldset>
+        <lefgend>Personal information:<br></lefgend>
+        First name:<br>
+        <label>
+            <input type="text" name=firstname method="GET">
+        </label><br>
+        Last name:<br>
+        <label>
+            <input type="password" name=lastname method="POST">
+        </label><br>
+        <br>
+        <input type="submit">
+    </fieldset>
+</form>
+<br />
+
+<form action="http://www.baidu.com" target="_blank">
+    <label>
+        <select name="food">
+            <option value="Apple">Apple</option>
+            <option value="Cake">Cake</option>
+            <option value="Egg">Egg</option>
+            <option value="Beef" selected>Beef</option>
+        </select>
+    </label>
+    <br><br>
+    <input type="submit" value="submitting" >
+</form>
+<br />
+
+<button type="button" onclick="alert('hello world!')">click me!</button>
+<br /><br />
+
+<label>
+<textarea name="message" rows="10" cols="30" style="background:lightblue" >
+    The cat was playing in the garden.
+</textarea>
+</label>
+<br />
+
+<form>
+    <p>What is your sex?</p><br>
+    <label>
+        <input type="radio" name="sexes" value="male" >
+    </label>male<br>
+    <label>
+        <input type="radio" name="sexes" value="female" >
+    </label>female<br>
+    <button type="button" onclick="alert(Sex_fun())">submit</button>
+    <script>
+        /**
+         * @return {string}
+         */
+        function Sex_fun() {
+            let sexs = document.getElementsByName("sexes");
+            let sex = '';
+            for (let i = 0; i < sexs.length; i++) {
+                if (sexs[i].checked)
+                    sex = sexs[i].value;
+            }
+
+            if (sex == '')
+                return "Please choose your sex!";
+            else
+                return "You are a " + sex;
+        }
+    </script>
+</form>
+<br />
+
+<%
+    int a = 5;
+    out.print(a + "hello ");
+    System.out.println("hello world");
+%>
+</body>
+</html>

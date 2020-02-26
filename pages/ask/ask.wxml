@@ -1,0 +1,21 @@
+
+<view class="hot">
+  <text>热门评论</text>
+</view>
+<view class="comment" wx:for="{{commentList}}" wx:for-index="index" wx:key='key'>
+    <text>{{item.content}}</text>
+    <text class="goodNumber" wx:if="{{item.goodNumber}}">{{item.goodNumber}}</text>
+    <image catchtap="change" src="{{item.url}}" class="good" data-commentid='{{item.commentID}}' data-index='{{index}}'>
+    </image>
+</view>
+
+<view class="ask">
+  <text>发起提问</text>
+</view>
+<view class="input">
+<textarea class="inputBox" bindinput="questionInput" maxlength="140"></textarea>
+</view>
+
+<view>
+  <button class="submit" type="submit" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="handIn">提交</button>
+</view>

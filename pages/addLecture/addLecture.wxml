@@ -1,0 +1,36 @@
+<text>讲座名称</text>
+<input type="text" bindinput="titleInput"></input>
+<text>讲师姓名</text>
+<input type="text" bindinput="authorInput"></input>
+<text>讲座地点</text>
+<input type="text" bindinput="addressInput"></input>
+<text>讲座时间：</text>
+<view>
+  <input type="text" maxlength="4" bindinput="yearInput"></input>
+  <text>年</text>
+  <input type="text" maxlength="2" bindinput="monthInput"></input>
+  <text>月</text>
+  <input type="text" maxlength="2" bindinput="dayInput"></input>
+  <text>日\n</text>
+</view>
+<text>讲座简介</text>
+<textarea bindinput="introductionInput" placeholder="简单介绍一下讲座" id="detail"></textarea>
+<button bindtap="uploadFiles">上传文件</button>
+<text>仅支持.doc,.ppt,.pdf,.xlsx,jpg,.png格式</text>
+<text></text>
+<image src="{{url}}" wx:if="{{chooseFile}}"></image>
+<button bindtap="showDialogBtn">发表</button>
+
+<!-- 弹窗 -->
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+  <view class="modal-title">发表</view>
+  <view class="modal-content">
+  <text decode="true" class="input">确定发表该讲座吗？</text>
+  
+  </view>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
+    <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
+  </view>
+</view>

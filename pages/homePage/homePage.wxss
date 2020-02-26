@@ -1,0 +1,78 @@
+.tittle {
+  text-align: center;
+  height: 80rpx;
+  width: 600rpx;
+  font-size: 45rpx;
+  margin-top: 50rpx;
+  margin-left: 80rpx;
+  border-color: #ff7200;
+  background: #fff4eb;
+  color: #ff7200;
+  border-radius: 100rpx;
+}
+.lecture {
+  height: 380rpx;
+  width: 100%;
+  margin-top: 60rpx;
+  border-color: #ff7200;
+  background: #fff4eb;
+  color: #ff7200;
+}
+.image {
+  height: 70rpx;
+  width: 70rpx;
+  margin-top: 20rpx;
+}
+.author {
+  font-size: 35rpx;
+  color: #ff7200;
+  margin-left: 80rpx;
+  margin-top: 70rpx;
+  float: left;
+}
+.imageDate {
+  height: 70rpx;
+  width: 70rpx;
+  position: relative;
+  top: 200rpx;
+  right: 310rpx;
+}
+.imagePos {
+  height: 70rpx;
+  width: 70rpx;
+  position: relative;
+  top: 70rpx;
+  left: 260rpx;
+}
+.date {
+  font-size: 33rpx;
+  position: relative;
+  top: 130rpx;
+  right: 30rpx;
+}
+.pos {
+  font-size: 33rpx;
+  position: relative;
+  top: 50rpx;
+  left: 270rpx;
+}
+.detail {
+  background-color: #ff7200;
+  color: #fff4eb;
+  font-size: 33rpx;
+  border-radius: 100rpx;
+  width: 200rpx;
+  float: left;
+  top: 50rpx;
+  left: 70rpx;
+}
+.join {
+  background-color: #ff7200;
+  color: #fff4eb;
+  font-size: 33rpx;
+  border-radius: 100rpx;
+  width: 200rpx;
+  float: right;
+  top: 50rpx;
+  right: 20rpx;
+}

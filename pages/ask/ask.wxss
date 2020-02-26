@@ -1,0 +1,96 @@
+.hot {
+  text-align: center;
+  width: 100%;
+  height: 110rpx;
+  font-size:45rpx;
+  position: relative;
+  border-color: #ff7200;
+  background: #fff4eb;
+  color: #ff7200;
+  border-radius: 100rpx;
+  font-weight: 500;
+  line-height: 90rpx;
+}
+
+.ask {
+  top: 100rpx;
+  text-align: center;
+  width: 100%;
+  height: 110rpx;
+  font-size:45rpx;
+  position: relative;
+  border-color: #ff7200;
+  background: #fff4eb;
+  color: #ff7200;
+  border-radius: 100rpx;
+  font-weight: 500;
+  line-height: 90rpx;
+}
+
+.input {
+  height: 180rpx;
+  width: 100%;
+  position: relative;
+  border-color: #ff7200;
+  line-height: 90rpx;
+  font-size:18rpx;
+  font-weight: 500;
+}
+
+.inputBox {
+  top: 160rpx;
+  height: 450rpx;
+  width: 100%;
+  font-size: 40rpx;
+  background-color: #fff4eb;
+  color: #ff7200;
+}
+
+.submit {
+  top: 500rpx;
+  text-align: center;
+  font-size:35rpx;
+  position: relative;
+  background: #ff7200;
+  color: #fff;
+  height: 100rpx;
+  width: 300rpx;
+  line-height: 100rpx;
+  border-radius: 100rpx;
+  box-shadow:0 0 40rpx rgba(255, 144, 0, .2);
+}
+
+.comment {
+  position: relative;
+  top: 50rpx;
+  height: 150rpx;
+  width: 100%;
+  background: #fff4eb;
+  font-size: 30rpx;
+  color: #ff7200;
+}
+
+/* .blank {
+  position: relative;
+  top: 200rpx;
+  height: 30rpx;
+  background: #fff;
+} */
+
+.good {
+  height: 60rpx;
+  width: 60rpx;
+  position: relative;
+  float: left;
+  left: 670rpx;
+  top: 70rpx;
+}
+
+.goodNumber {
+  height: 60rpx;
+  width: 60rpx;
+  position: absolute;
+  float: left;
+  left: 675rpx;
+  top: 0rpx;
+}
