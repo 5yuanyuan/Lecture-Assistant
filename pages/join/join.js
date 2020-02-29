@@ -14,6 +14,10 @@ Page({
   },
 
   onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中...',
+      mask:true
+    })
     var that = this;
     var unjoinLectures = [];
     var joinedLectures = [];
@@ -42,6 +46,7 @@ Page({
           unjoinLec: unjoinLectures,
           joinedLec: joinedLectures
         })
+        wx.hideLoading();
       }
     });
   },
@@ -85,8 +90,8 @@ Page({
       url: '../ask/ask?id=' + id + '&lecturetype=' + lecturetype
     })
   },
-
-  onShow:function(){
+  
+  onPullDownRefresh:function(){
     this.onLoad();
   }
 })

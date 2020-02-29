@@ -50,6 +50,7 @@ Page({
               app.globalData.userID = that.data.userID;
               app.globalData.password = that.data.password;
               app.globalData.identify = user.identify;
+              app.globalData.NickName = user.NickName;
               wx.showToast({
                 title: '登录成功',
                 icon: 'success',

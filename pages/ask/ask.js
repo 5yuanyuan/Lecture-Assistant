@@ -12,6 +12,10 @@ Page({
 
   //页面初始化
   onLoad: function (options) {
+    wx.showLoading({
+      title: 'loading...',
+      mask:true
+    })
     var that = this;
     var id = options.id;     //讲座id
     var lecturetype = options.lecturetype; //讲座类型
@@ -66,6 +70,7 @@ Page({
             that.setData({
               commentList: comments
             })
+            wx.hideLoading();
           },
           fail: err => {
             console.log("Not Found!", err);
@@ -124,6 +129,7 @@ Page({
             tag: tag,
             index: index,
             userID: app.globalData.userID,
+            NickName:app.globalData.NickName,
             likeComments: likeComments
           },
           success: res => {
@@ -149,6 +155,10 @@ Page({
         duration: 500
       })
     } else {
+      wx.showLoading({
+        title: '正在发表',
+        mask:true
+      })
       //将提问添加到数据库中
       var content = this.data.question;
       var askerID = app.globalData.userID;
@@ -165,18 +175,19 @@ Page({
         },
         success: res => {
           console.log("提交", res);
+          // 这里修改成跳转的页面
+          wx.hideLoading();
+
+          wx.showToast({
+            title: '提交成功',
+            icon: 'success',
+            duration: 500
+          })
+          wx.switchTab({
+            url: '../myAsk/myAsk'
+          });
         }
       })
-
-      // 这里修改成跳转的页面
-      wx.showToast({
-        title: '提交成功',
-        icon: 'success',
-        duration: 5000
-      })
-      wx.switchTab({
-        url: '../myAsk/myAsk'
-      });
     }
   }
 })

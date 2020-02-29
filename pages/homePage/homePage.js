@@ -10,6 +10,10 @@ Page({
   },
   
   onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中...',
+      mask:true
+    })
     var that = this;
     var userID = app.globalData.userID;
     var password = app.globalData.password;
@@ -32,10 +36,18 @@ Page({
       success: res => {
         console.log(res.data);
         //获取讲座列表
-        var lecs = res.data;
+        var lectures = [];
+        var i = 0, j = res.data.length -1;
+        for (;j >= 0;i++,j--) {
+          lectures[i] = res.data[j];
+          lectures[i].isOnShowDetail = false;
+          console.log(i + ' ' +j);
+        }
+
         that.setData({
-          lectures:lecs
+          lectures:lectures
         })
+        wx.hideLoading();
       }
     });
   },
@@ -73,7 +85,7 @@ Page({
     console.log("out it");
   },
 
-  onShow:function(){
+  onPullDownRefresh:function(){
     this.onLoad();
   }
 })

@@ -25,6 +25,13 @@ App({
     var minute = today.getMinutes();
     var second = today.getSeconds();
 
+    if (hour.length == 1)
+      hour = '0' + hour;
+    if (minute.length == 1)
+      minute = '0' + minute;
+    if (second.length == 1)
+      second = '0' + second;
+
     return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
   },
 
@@ -33,6 +40,7 @@ App({
     userInfo: null,
     userID: '',   //使用者账号
     password: '',  //密码
+    NickName:'',  //使用者昵称
     identify: '',  //使用者身份
     unjoinLectures: [],  //未开始的讲座
     joinedLectures: [],   //已经结束的讲座

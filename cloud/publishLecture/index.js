@@ -42,7 +42,7 @@ exports.main = async (event, context) => {
         'userID': userID
       }).update({
         data: {
-          'myLectures': _.push(obj)
+          'myLectures': _.unshift(obj)
         }
       }).then(res => {
         result += ('&' + res.stats.updated);

@@ -7,6 +7,11 @@ Page({
   },
 
   onLoad: function(options) {
+    wx.showLoading({
+      title: '加载中...',
+      mask:true
+    })
+
     var that = this;
     var userID = app.globalData.userID;
     var myComments = [];
@@ -41,6 +46,7 @@ Page({
           that.setData({
             myComments:myComments
           })
+          wx.hideLoading();
         }
     })
   },
@@ -105,21 +111,18 @@ Page({
           },
           success: res => {
             console.log("修改成功", res);
+
+            that.setData({  //重置评论信息
+              myComments: myComments
+            })
           }
         })
       }
     })
-
-    that.setData({  //重置评论信息
-      myComments: myComments
-    })
-
   },
-
-  onShow:function() {
+  onShow:function(){
     this.onLoad();
   },
-
   onPullDownRefresh:function() {
     this.onLoad();
   }

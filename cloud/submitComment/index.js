@@ -10,12 +10,14 @@ const _ = db.command;
 exports.main = async (event, context) => {
   var _id = event.id;  //讲座的_id
   var asker = event.asker;  //提问者ID
+  var NickName = event.NickName;
   var content = event.content; //提问者提问内容
   var time = event.time;  //提问时间
   var commentID = event.commentID;  //评论的ID
 
   var obj = {  //定义评论对象
     'askerID': asker,
+    'NickName':NickName,
     'content': content,
     'goodNumber': 0,
     'time': time,
@@ -36,6 +38,7 @@ exports.main = async (event, context) => {
 
   //为提问者的提问添加记录
   var myobj = {
+    'NickName': NickName,
     'content': content,
     'time': time,
     'lectureID': _id,
@@ -48,7 +51,7 @@ exports.main = async (event, context) => {
       'userID': asker,
     }).update({
       data: {
-        'myComments': _.push(myobj)
+        'myComments': _.unshift(myobj)
       }
     })
   } catch (e) {

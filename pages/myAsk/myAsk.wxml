@@ -1,7 +1,9 @@
 <view class="tittle">我的历史提问</view>
 <view class="questionBox" wx:for="{{myComments}}">
-  <text>{{item.content}}</text>
-  <text class="goodNumber" wx:if="{{item.goodNumber}}">{{item.goodNumber}}</text>
+  <view class="name">{{item.NickName}}</view>
+  <view class="time">{{item.time}}</view>
+  <view class="goodNumber" wx:if="{{item.goodNumber}}">{{item.goodNumber}}</view>
   <image catchtap="change" src="{{item.url}}" class="good" data-commentid='{{item.commentID}}' data-lectureid='{{item.lectureID}}' data-index='{{index}}'>
   </image>
+  <view>{{item.content}}</view>
 </view>

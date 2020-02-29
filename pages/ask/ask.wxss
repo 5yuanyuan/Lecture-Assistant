@@ -32,7 +32,7 @@
   width: 100%;
   position: relative;
   border-color: #ff7200;
-  line-height: 90rpx;
+  line-height: 60rpx;
   font-size:18rpx;
   font-weight: 500;
 }
@@ -61,36 +61,62 @@
 }
 
 .comment {
+  display: flex;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  margin: 2px;
+  padding: 5px;
+  border: 2px;
+  text-align: left;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
   position: relative;
   top: 50rpx;
-  height: 150rpx;
   width: 100%;
   background: #fff4eb;
   font-size: 30rpx;
   color: #ff7200;
+  border-bottom: 1px solid #ff7200;
 }
 
-/* .blank {
-  position: relative;
-  top: 200rpx;
-  height: 30rpx;
-  background: #fff;
-} */
-
 .good {
-  height: 60rpx;
-  width: 60rpx;
+  height: 45rpx;
+  width: 45rpx;
   position: relative;
-  float: left;
-  left: 670rpx;
-  top: 70rpx;
+  left: 680rpx;
+  top: 0rpx;
 }
 
 .goodNumber {
-  height: 60rpx;
+  display:flex;
+  height: 20rpx;
   width: 60rpx;
   position: absolute;
-  float: left;
   left: 675rpx;
   top: 0rpx;
+  border-right: 2px;
+  padding: 2px;
+  margin: 2px;
+  float: right;
+}
+.name {
+  font-size: 16px;
+  border-right: 2px;
+  padding: 2px;
+  width: 300px;
+}
+
+.time {
+  font-size: 13px;
+  border: 1px;
+  padding: 1px;
+  margin: 2px;
+  width: 180px;
+}
+
+
+.content{
+  border: 1px;
+  padding: 2px;
 }

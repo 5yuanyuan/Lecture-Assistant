@@ -3,10 +3,12 @@
   <text>热门评论</text>
 </view>
 <view class="comment" wx:for="{{commentList}}" wx:for-index="index" wx:key='key'>
-    <text>{{item.content}}</text>
-    <text class="goodNumber" wx:if="{{item.goodNumber}}">{{item.goodNumber}}</text>
+  <view class="name">{{item.NickName}}</view>
+  <view class="time">{{item.time}}</view>
+  <view class="goodNumber" wx:if="{{item.goodNumber}}">{{item.goodNumber}}</view>
     <image catchtap="change" src="{{item.url}}" class="good" data-commentid='{{item.commentID}}' data-index='{{index}}'>
-    </image>
+mode="aspectFill"    </image>
+    <view>{{item.content}}</view>
 </view>
 
 <view class="ask">
