@@ -6,8 +6,8 @@
     <text class="author">{{item.author}}\n\n</text>
   </view>
   <view>
-    <button class="ask" bindtap="wantToAsk" data-lecturetype="{{item.lecturetype}}" data-index='{{index}}' data-id='{{item._id}}' >提问</button>
-    <button class="files" bindtap="download_File" data-fileid="{{item.fileID}}">资料下载</button>
+    <button class="ask" bindtap="wantToAsk" data-lecturetype="{{item.lecturetype}}" data-index='{{index}}' data-id='{{item._id}}' >进入讲座</button>
+    <button class="files" bindtap="download_File" data-fileid="{{item.fileID}}" data-lecturetype="{{item.lecturetype}}">资料下载</button>
   </view>
   <view>
     <image src="time.png" class="imageDate"></image>
@@ -27,8 +27,8 @@
     <text class="author">{{item.author}}\n\n</text>
   </view>
   <view>
-    <button class="ask" bindtap="wantToAsk" data-lecturetype='{{item.lecturetype}}' data-index='{{index}}' data-id='{{item._id}}'>提问</button>
-    <button class="files" bindtap="download_File" data-fileid="{{item.fileID}}">资料下载</button>
+    <button class="ask" bindtap="wantToAsk" data-lecturetype='{{item.lecturetype}}' data-index='{{index}}' data-id='{{item._id}}'>查看详情</button>
+    <button class="files" bindtap="download_File" data-fileid="{{item.fileID}}" data-lecturetype="{{item.lecturetype}}">资料下载</button>
   </view>
   <view>
     <image src="time.png" class="imageDate"></image>

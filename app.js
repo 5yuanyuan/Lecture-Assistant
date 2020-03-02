@@ -42,8 +42,6 @@ App({
     password: '',  //密码
     NickName:'',  //使用者昵称
     identify: '',  //使用者身份
-    unjoinLectures: [],  //未开始的讲座
-    joinedLectures: [],   //已经结束的讲座
   },
 
   //生成唯一ID

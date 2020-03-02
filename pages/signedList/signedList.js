@@ -8,7 +8,8 @@ Page({
    */
   data: {
     lectureID:'',
-    signedList:[]
+    signedList:[],
+    available: false
   },
 
   /**
@@ -39,50 +40,57 @@ Page({
   cancelsign: function() {
     var that = this;
     var available = that.data.available;
+    console.log(available);
 
-    wx.showLoading({
-      title: 'loading',
-      mask:true
-    })
-    
-    if (available) {
-      wx.cloud.callFunction({
-        name: 'stopSign',
-        data: {
-          lectureID: that.data.lectureID
-        },
-        success: res => {
-          wx.hideLoading();
-          console.log(res);
+    wx.showModal({
+      title: '停止签到',
+      content: '是否停止本次签到？',
+      success: res=> {
+        if (res.confirm) {
+          if (available) {  //如果讲座在可签到的状态
+            //调用云函数 停止签到
+            wx.cloud.callFunction({
+              name: 'stopSign',
+              data: {
+                lectureID: that.data.lectureID
+              },
+              success: res => {
+                console.log(res);
 
-          that.setData({
-            available: false
-          })
-          wx.showToast({
-            title: '签到已停止..',
-            icon: 'loading',
-            duration: 1000
-          })
-        },
-        fail: err => {
-          console.log(err);
-          wx.showToast({
-            title: '取消失败...',
-            icon: 'loading',
-            duration: 1000
-          })
+                that.setData({
+                  available: false
+                })
+                wx.showModal({
+                  title: '操作成功',
+                  content: '签到已停止！',
+                  success: res=> {},
+                  fail: err=> {}
+                })
+              },
+              fail: err => {
+                console.log(err);
+                wx.showToast({
+                  title: '取消失败...',
+                  icon: 'loading',
+                  duration: 1000
+                })
+              }
+            })
+          } else {
+            wx.showModal({
+              title: '操作失败',
+              content: '当前未在签到状态，请先发起签到！',
+              success: res=> {},
+              fail: err=> {}
+            })
+          }
+        } else {
+          /**
+           * 用户选择取消
+           */
         }
-      })
-    } else {
-      wx.hideLoading();
-
-      wx.showToast({
-        title: '已取消签到..',
-        icon: 'loading',
-        duration: 1000,
-        mask: true
-      })
-    }
+      }
+    })
   }
 
 })

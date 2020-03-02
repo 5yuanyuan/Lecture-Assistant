@@ -96,6 +96,9 @@ Page({
     var commentList = that.data.commentList;
     var tag = 0; //判断为点赞还是取消点赞
     console.log(that.data.commentList);
+    console.log(commentID);
+    console.log(index);
+    
     if (!commentList[index].isGood) {  //没有被点赞
       commentList[index].goodNumber += 1;
       commentList[index].url = 'goodAfterChoose.png';
@@ -108,8 +111,10 @@ Page({
       tag = -1;
     }
 
-    console.log(commentID);
-    console.log(index);
+    that.setData({  //重置评论信息
+      commentList: commentList
+    })
+
     var likeComments = [];  //用户点赞的评论列表
     db.collection("users").where({
       'userID': app.globalData.userID
@@ -138,11 +143,6 @@ Page({
         })
       }
     })
-
-    that.setData({  //重置评论信息
-      commentList: commentList
-    })
-
   },
 
   handIn: function () {

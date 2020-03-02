@@ -33,6 +33,7 @@ Page({
       success:res=>{
         myLectures = res.data;
         console.log(myLectures);
+
         myLectures.reverse();
         that.setData({
           myLectures: myLectures
@@ -53,14 +54,15 @@ Page({
       itemList: ['发起签到','查看签到情况'],
       success(res) {
         console.log(res.tapIndex);
-        if (res.tapIndex == 0) {
-          if (available) {
-            wx.showToast({
-              title: '请勿重复发布',
-              icon: 'loading',
-              duration:1000
+        if (res.tapIndex == 0) { //老师选择发起签到
+          if (available) { //若签到已发起
+            wx.showModal({
+              title: '操作失败',
+              content: '签到未结束，请勿重复发布签到！',
+              success: res=> {},
+              fail: err=> {}
             })
-          } else {
+          } else {  //否则发起签到
             //获取当前的地理位置、速度
             wx.getLocation({
               type: 'wgs84', // 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标
@@ -76,7 +78,8 @@ Page({
                   latitude: res.latitude,
                   longitude: res.longitude,
                 })
-
+                
+                //调用云函数 添加地理位置
                 wx.cloud.callFunction({
                   name: 'addLocation',
                   data: {
@@ -84,16 +87,17 @@ Page({
                     longitude: res.longitude,
                     lectureID: lectureID
                   },
-                  success: res => {
+                  success: res => {  //发起成功后跳转界面
                     console.log(res);
+
                     wx.hideLoading();
                     wx.navigateTo({
-                      url: '../signedList/signedList?lectureID=' + lectureID,
+                      url: '../signedList/signedList?lectureID='+lectureID+'&available='+true
                     })
                   }
                 })
               },
-              fail: function () {
+              fail: function () {  //获取地理位置失败
                 wx.getSetting({
                   success: function (res) {
                     var statu = res.authSetting;
@@ -155,17 +159,17 @@ Page({
                 })
               }
             })
-          }
-        } else if (!available) {
-          wx.showToast({
-            title: '请先发起签到!',
-            icon: 'loading',
-            mask:true,
-            duration:1000
+          }  //若老师选择查看签到名单
+        } else if (!available) {  //先判断是否发起讲座
+          wx.showModal({
+            title: '操作失败',
+            content: '请先发起签到！',
+            success: res=> {},
+            fail: err=> {}
           })
-        } else {
+        } else {   //跳转到签到名单界面
           wx.navigateTo({
-            url: '../signedList/signedList?lectureID='+lectureID+'&available='+available
+            url: '../signedList/signedList?lectureID='+lectureID+'&available='+true
           })
         }
       },
