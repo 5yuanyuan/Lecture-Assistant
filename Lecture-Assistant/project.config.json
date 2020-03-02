@@ -1,0 +1,98 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"coverView": true,
+		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.9.4",
+	"appid": "wx92af32bb0e7fb9a3",
+	"projectname": "%E6%A0%A1%E5%9B%AD%E8%AE%B2%E5%BA%A7%E5%B0%8F%E5%8A%A9%E6%89%8B",
+	"cloudfunctionTemplateRoot": "",
+	"watchOptions": {
+		"ignore": []
+	},
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"scripts": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": 0,
+					"name": "提问界面",
+					"pathName": "pages/ask/ask",
+					"query": "登录界面",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "登录界面",
+					"pathName": "pages/login/login",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的提问",
+					"pathName": "pages/myAsk/myAsk",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 3,
+					"name": "学生主页",
+					"pathName": "pages/studentHomePage/studentHomePage",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的讲座",
+					"pathName": "pages/join/join",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}
