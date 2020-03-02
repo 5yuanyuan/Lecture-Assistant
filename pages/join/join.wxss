@@ -4,21 +4,21 @@
   height: 80rpx;
   width: 600rpx;
   font-size: 45rpx;
-  top: 50rpx;
+  top: 30rpx;
   left: 80rpx;
-  border-color: #ff7200;
   background: #fff4eb;
   color: #ff7200;
   border-radius: 100rpx;
+  border-color: #ff7200;
 }
 .unjoinLecture {
   position: relative;
   height: 380rpx;
   width: 100%;
-  top: 130rpx;
-  border-color: #ff7200;
+  margin-top: 60rpx;
   background: #fff4eb;
   color: #ff7200;
+  border-color: #ff7200;
 }
 .join {
   position: relative;
@@ -26,7 +26,7 @@
   height: 80rpx;
   width: 600rpx;
   font-size: 45rpx;
-  top: 150rpx;
+  margin-top: 150rpx;
   left: 80rpx;
   border-color: #ff7200;
   background: #fff4eb;
@@ -44,7 +44,7 @@
   position: relative;
   height: 380rpx;
   width: 100%;
-  top: 60rpx;
+  margin-top: 60rpx;
   border-color: #ff7200;
   background: #fff4eb;
   color: #ff7200;
@@ -60,7 +60,7 @@
   font-size: 35rpx;
   color: #ff7200;
   left: 80rpx;
-  top: 50rpx;
+  top: 60rpx;
   /* float: left; */
 }
 .imageDate {
@@ -101,6 +101,7 @@
   color: #fff4eb;
   font-size: 33rpx;
   border-radius: 100rpx;
+  height: 80rpx;
   width: 200rpx;
   left: 240rpx;
   float: left;
@@ -111,6 +112,7 @@
   color: #fff4eb;
   font-size: 33rpx;
   border-radius: 100rpx;
+  height: 80rpx;
   width: 200rpx;
   right: 20rpx;
   float: right;

@@ -4,7 +4,7 @@
   height: 80rpx;
   width: 600rpx;
   font-size: 45rpx;
-  top: 50rpx;
+  top: 30rpx;
   left: 80rpx;
   border-color: #ff7200;
   background: #fff4eb;
@@ -15,7 +15,7 @@
   position: relative;
   height: 380rpx;
   width: 100%;
-  top: 120rpx;
+  margin-top: 60rpx;
   border-color: #ff7200;
   background: #fff4eb;
   color: #ff7200;

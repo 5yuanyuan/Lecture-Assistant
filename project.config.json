@@ -83,6 +83,12 @@
 					"pathName": "pages/join/join",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "提交讲座",
+					"pathName": "pages/addLecture/addLecture",
+					"scene": null
 				}
 			]
 		}
