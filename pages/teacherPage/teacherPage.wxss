@@ -1,0 +1,7 @@
+/* pages/teacherPage/teacherPage.wxss */
+.image {
+  height: 70rpx;
+  width: 70rpx;
+  margin-top: 20rpx;
+}
+

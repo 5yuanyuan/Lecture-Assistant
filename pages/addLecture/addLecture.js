@@ -5,7 +5,7 @@ Page({
   data: {
     title: '',  //讲座名称
     author: '',  //讲师姓名
-    authorID: app.globalData.userID, //讲师账号
+    authorID: '', //讲师账号
     address: '', //讲座地点
     year: '',  //年
     month: '', //月
@@ -153,7 +153,7 @@ Page({
     var that = this;
     var title = that.data.title;
     var author = that.data.author;
-    var authorID = that.data.authorID;
+    var authorID = app.globalData.userID;
     var address = that.data.address;
     var year = that.data.year;
     var month = that.data.month;
@@ -217,9 +217,8 @@ Page({
                   icon: 'success',
                   duration: 1000
                 })
-                app.globalData.publishedID = arr[0];
-                wx.switchTab({
-                  url: '../join/join',
+                wx.redirectTo({
+                  url: '../teacherPage/teacherPage',
                 })
               } else {
                 wx.showToast({

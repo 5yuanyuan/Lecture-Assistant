@@ -1,0 +1,2 @@
+<button bindtap="cancelsign">停止签到</button>
+<text>已经签到的同学</text>

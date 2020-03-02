@@ -1,5 +1,5 @@
 <!--pages/map/map.wxml-->
- 
+ <button bindtap="setDisabled" bindtap="uplocation">上传位置</button>
 <!-- 这是地图部分 -->
  
 <view class="map_container">

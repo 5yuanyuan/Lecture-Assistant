@@ -1,4 +1,3 @@
-<image src="add.png" class="image" wx-if="{{identify}}" bindtap="addLecture"></image>
 
 <view class="tittle">近期讲座</view>
 <view wx:for='{{lectures}}' wx:key='key'>
@@ -10,7 +9,7 @@
   </view>
   <view>
     <button class="detail" bind:touchstart="onview" bind:touchend="outview" data-index="{{index}}">简介</button>
-    <button class="join" bindtap="join">报名</button>
+    <button class="join" bindtap="join" data-lectureid="{{item._id}}" data-lecturetype="{{item.lecturetype}}" data-title="{{item.title}}">报名</button>
   </view>
   <view>
     <image src="time.png" class="imageDate"></image>

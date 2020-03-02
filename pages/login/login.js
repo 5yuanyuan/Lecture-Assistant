@@ -23,10 +23,16 @@ Page({
 
   // 登录
   login: function () {
+    wx.showLoading({
+      title: '正在登录...',
+      icon: 'loading',
+      mask: true
+    })
     var that = this;
     var userID = that.data.userID;
     var password = that.data.password;
     if (userID.length == 0 || password.length == 0) {
+      wx.hideLoading();
       wx.showToast({
         title: '请完整输入！',
         icon: 'loading',
@@ -40,26 +46,34 @@ Page({
           if (res.data.length != 0) {
             var user = res.data[0];
             if (password.trim() != user.password) {
+              wx.hideLoading();
               wx.showToast({
                 title: '密码错误',
                 icon: 'loading',
                 duration: 1000
               })
             } else {
+              wx.hideLoading();
               //为homePage传递参数
               app.globalData.userID = that.data.userID;
               app.globalData.password = that.data.password;
-              app.globalData.identify = user.identify;
               app.globalData.NickName = user.NickName;
+
               wx.showToast({
                 title: '登录成功',
                 icon: 'success',
                 duration: 1000
               })
 
-              wx.switchTab({
-                url: '../homePage/homePage'
-              });
+              if (user.identify == 'student') {
+                wx.switchTab({
+                  url: '../homePage/homePage'
+                });
+              } else {
+                wx.redirectTo({
+                  url: '../teacherPage/teacherPage',
+                })
+              }
             }
           } else {
             wx.showToast({
@@ -71,5 +85,9 @@ Page({
         }
       })
     }
+  },
+
+  onShow: function() {
+    this.onLoad();
   }
 })

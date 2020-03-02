@@ -1,0 +1,18 @@
+<image src="add.png" class='image' bindtap="addLecture"></image>
+
+<view wx:for="{{myLectures}}" wx:key="key">
+  <view><text>{{item.title}}</text></view>
+  <view><text>{{item.authorID}}</text></view>
+  <view><text>{{item.author}}</text></view>
+  <view><text>{{item.address}}</text></view>
+  <button bindtap="getcomments" data-lectureid="{{item._id}}">评论列表</button>
+  <button bindtap="qiandao" data-available="{{item.available}}" data-lectureid="{{item._id}}" wx:if="{{item.lecturetype == 'unjoinLecture'}}">发起定位签到</button>
+</view>
+
+<view wx:for="{{signedList}}" wx:key="key">
+  <view>
+    <text>{{item.userID}}</text>
+    <text>{{item.NickName}}</text>
+    <text>{{item.time}}</text>
+  </view>
+</view>

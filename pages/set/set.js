@@ -1,4 +1,5 @@
-// pages/map/map.js
+const db = wx.cloud.database()
+const locationCollection = db.collection('location')
 Page({
   data: {
     addmissage: '选的位置',
@@ -64,7 +65,9 @@ Page({
       scale: 28
     })
   },
-
-
+  uplocation: function (event){
+    console.log(event);
+  }
+  
 
 })

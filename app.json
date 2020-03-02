@@ -6,7 +6,10 @@
     "pages/myAsk/myAsk",
     "pages/ask/ask",
     "pages/set/set",
-    "pages/addLecture/addLecture"
+    "pages/addLecture/addLecture",
+    "pages/teacherPage/teacherPage",
+    "pages/signedList/signedList",
+    "pages/teacherComments/teacherComments"
   ],
   "window": {
     "backgroundTextStyle": "dark",

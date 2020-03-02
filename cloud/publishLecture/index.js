@@ -29,7 +29,8 @@ exports.main = async (event, context) => {
         'date': date,
         'introduction': introduction,
         'lecturetype': "unjoinLecture",
-        'fileID': fileID
+        'fileID': fileID,
+        'available':false
       }
     }).then(res => {
       console.log(res);
