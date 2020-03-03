@@ -1,23 +1,40 @@
-
-<view class="hot">
-  <text>热门评论</text>
+<view class='showmine'>
+  <button style='background: {{bgcolor1}};' bindtap='all'>全部评论</button>
+  <button style='background: {{bgcolor3}};' bindtap='tosign'>签到</button>
+  <button style='background: {{bgcolor2}};' bindtap='mine'>我的提问</button>
 </view>
-<view class="comment" wx:for="{{commentList}}" wx:for-index="index" wx:key='key'>
-  <view class="name">{{item.NickName}}</view>
-  <view class="time">{{item.time}}</view>
-  <view class="goodNumber" wx:if="{{item.goodNumber}}">{{item.goodNumber}}</view>
+
+<view wx:if="{{!ismine}}">
+  <view class="hot">
+    <text>热门评论</text>
+  </view>
+  <view class="comment" wx:for="{{commentList}}" wx:for-index="index" wx:key='key'>
+    <view class="name">{{item.NickName}}</view>
+    <view class="time">{{item.time}}</view>
+    <view class="goodNumber" wx:if="{{item.goodNumber}}">{{item.goodNumber}}</view>
+      <image catchtap="change" src="{{item.url}}" class="good" data-commentid='{{item.commentID}}' data-index='{{index}}'>
+  mode="aspectFill"    </image>
+      <view>{{item.content}}</view>
+  </view>
+</view>
+
+<view wx:if="{{ismine}}">
+  <view class="comment" wx:for="{{myComments}}" wx:for-index="index" wx:key='key'>
+    <view class="name">{{item.NickName}}</view>
+    <view class="time">{{item.time}}</view>
+    <view class="goodNumber" wx:if="{{item.goodNumber}}">{{item.goodNumber}}👍</view>
     <image catchtap="change" src="{{item.url}}" class="good" data-commentid='{{item.commentID}}' data-index='{{index}}'>
-mode="aspectFill"    </image>
+  mode="aspectFill"    </image>
     <view>{{item.content}}</view>
-</view>
-
-<view class="ask">
+  </view>
+  <view class="ask">
   <text>发起提问</text>
-</view>
-<view class="input">
-<textarea class="inputBox" bindinput="questionInput" maxlength="140"></textarea>
-</view>
+  </view>
+  <view class="input">
+  <textarea class="inputBox" bindinput="questionInput" maxlength="140"></textarea>
+  </view>
 
-<view>
-  <button class="submit" type="submit" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="handIn">提交</button>
+  <view>
+    <button class="submit" type="submit" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="handIn">提交</button>
+  </view>
 </view>

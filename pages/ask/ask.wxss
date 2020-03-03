@@ -1,30 +1,32 @@
 .hot {
+  position: relative;
   text-align: center;
-  width: 100%;
+  width: 600rpx;
   height: 110rpx;
   font-size:45rpx;
-  position: relative;
   border-color: #ff7200;
   background: #fff4eb;
   color: #ff7200;
   border-radius: 100rpx;
   font-weight: 500;
   line-height: 90rpx;
+  left: 100rpx;
 }
 
 .ask {
+  position: relative;
   top: 100rpx;
   text-align: center;
-  width: 100%;
+  width: 600rpx;
   height: 110rpx;
   font-size:45rpx;
-  position: relative;
   border-color: #ff7200;
   background: #fff4eb;
   color: #ff7200;
   border-radius: 100rpx;
   font-weight: 500;
   line-height: 90rpx;
+  left: 100rpx;
 }
 
 .input {
@@ -41,7 +43,7 @@
   top: 160rpx;
   height: 450rpx;
   width: 100%;
-  font-size: 40rpx;
+  font-size: 35rpx;
   background-color: #fff4eb;
   color: #ff7200;
 }
@@ -119,4 +121,11 @@
 .content{
   border: 1px;
   padding: 2px;
+}
+
+.showmine {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: white;
 }

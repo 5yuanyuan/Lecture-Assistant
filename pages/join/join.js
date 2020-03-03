@@ -109,13 +109,13 @@ Page({
           })
         }
       })
-      
     }
   },
 
   wantToAsk: function (e) {
     var id = e.currentTarget.dataset.id;
     var lecturetype = e.currentTarget.dataset.lecturetype;
+    var userID = e.currentTarget.dataset.userid;
     wx.navigateTo({
       url: '../ask/ask?id=' + id + '&lecturetype=' + lecturetype
     })

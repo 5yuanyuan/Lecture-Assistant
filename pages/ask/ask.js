@@ -7,15 +7,17 @@ Page({
     question: '',   //问题
     lecturetype: "",  //传入讲座类型
     id: "",     //传入讲座的_id
-    commentList: []   //该讲座的评论列表
+    commentList: [],   //该讲座的评论列表
+    myComments: [],  //我在该讲座的评论
+
+    bgcolor1: "gainsboro",
+    bgcolor2: "white",
+    bgcolor3: "rgba(255, 144, 0, .2)",
+    ismine: false,
   },
 
   //页面初始化
   onLoad: function (options) {
-    wx.showLoading({
-      title: 'loading...',
-      mask:true
-    })
     var that = this;
     var id = options.id;     //讲座id
     var lecturetype = options.lecturetype; //讲座类型
@@ -26,6 +28,20 @@ Page({
       lecturetype: lecturetype,
       id: id
     })
+    that.showAll();
+  },
+  /**
+   * 展示所有评论
+   */
+  showAll: function() {
+    wx.showLoading({
+      title: 'loading',
+      mask: true
+    })
+    var that = this;
+    var id = that.data.id;     //讲座id
+    var lecturetype = that.data.lecturetype; //讲座类型
+    var comments = [];  //评论列表
     db.collection('lectures').doc(id).get({  //获取该讲座类型的集合
       success: res => {
         comments = res.data.commentList;
@@ -36,7 +52,6 @@ Page({
           'userID': app.globalData.userID
         }).get({
           success: res => {
-            console.log("HI");
             console.log(res.data[0].LikeComments);
             //用户点赞的评论列表
             var arr = res.data[0].LikeComments;
@@ -48,9 +63,9 @@ Page({
               //对讲座评论列表进行遍历
               //在点赞列表里查询 是否点赞评论列表中的评论
               comments.forEach(item => {
-          console.log(likeCommentIDList.indexOf(item.commentID));
+                console.log(likeCommentIDList.indexOf(item.commentID));
                 //如果点赞列表里存在该评论
-            if (likeCommentIDList.indexOf(item.commentID) > -1) {
+                if (likeCommentIDList.indexOf(item.commentID) > -1) {
                   item.url = 'goodAfterChoose.png';
                   item.isGood = true;
                 } else {
@@ -76,6 +91,41 @@ Page({
             console.log("Not Found!", err);
           }
         })
+      }
+    })
+  },
+  /**
+   * 展示我在该讲座的评论
+   */
+  showMine: function() {
+    wx.showLoading({
+      title: 'loading',
+      mask: true
+    });
+
+    var that = this;
+    var id = that.data.id;     //讲座id
+    var lecturetype = that.data.lecturetype; //讲座类型
+    var myComments = [];  //存储我在该讲座的评论
+    var userID = app.globalData.userID;  //我的账号
+
+    db.collection('lectures').where({
+      _id: id
+    }).get({
+      success: res=> {
+        console.log(res.data);
+        var list = res.data[0].commentList;
+
+        list.forEach(item => {
+          if (item.askerID == userID) {
+            myComments.push(item);
+          }
+        })
+
+        that.setData({
+          myComments: myComments
+        })
+        wx.hideLoading();
       }
     })
   },
@@ -162,6 +212,7 @@ Page({
       //将提问添加到数据库中
       var content = this.data.question;
       var askerID = app.globalData.userID;
+      var NickName = app.globalData.NickName;
       console.log(app.globalData.userID);
 
       wx.cloud.callFunction({
@@ -171,7 +222,8 @@ Page({
           asker: askerID,
           content: content,
           time: app.getTime(),
-          commentID: app.guid()
+          commentID: app.guid(),
+          NickName: NickName
         },
         success: res => {
           console.log("提交", res);
@@ -183,11 +235,208 @@ Page({
             icon: 'success',
             duration: 500
           })
-          wx.switchTab({
-            url: '../myAsk/myAsk'
-          });
+          
+          that.mine();
         }
       })
     }
-  }
+  },
+  /**
+   * 签到
+   */
+  tosign: function() {
+    var that = this;
+    var id = that.data.id;
+    var lecturetype = that.data.lecturetype;
+    var userID = app.globalData.userID;
+
+    if (lecturetype == 'joinedLecture') {
+      wx.showModal({
+        title: '签到失败',
+        content: '该讲座已结束',
+        success: res=> {},
+        fail: err=>{}
+      })
+    } else {
+      wx.showLoading({
+        title: '正在签到...',
+        mask: true
+      });
+      
+      db.collection('users').where({
+        'userID': userID
+      }).get({
+        success: res=> {
+          var mySigns = res.data[0].mySigns;
+          var flag = false;
+          for (var i = 0; i < mySigns.length ;i++) { //判断是否完成签到
+            if (mySigns[i].lectureID == id) {
+              flag = true;
+              break;
+            }
+          }
+          if (flag) {  //已经完成签到，提示无法二次签到
+            wx.hideLoading();
+            wx.showModal({
+              title: '操作失败',
+              content: '请勿重复签到！',
+            })
+          } else {  //发起签到请求
+            db.collection('lectures').where({
+              _id: id
+            }).get({
+              success: res => {
+                console.log(res);
+                wx.hideLoading();
+
+                if (!res.data[0].available) { //若讲座没有发布签到
+                  wx.showModal({
+                    title: '签到失败',
+                    content: '该讲座尚未发布签到',
+                    success: res => { },
+                    fail: err => { }
+                  })
+                } else {
+                  wx.getLocation({
+                    type: 'wgs84', // 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标
+                    success: function (res) {
+                      console.log(res);
+
+                      wx.showLoading({
+                        title: '正在获取位置..',
+                        mask: true
+                      });
+                      /**
+                       * 调用云函数
+                       */
+                      wx.cloud.callFunction({
+                        name: 'signin',
+                        data: {
+                          latitude: res.latitude,
+                          longitude: res.longitude,
+                          lectureID: id,
+                          userID: userID
+                        },
+                        success: res => {
+                          wx.hideLoading();
+                          console.log(res);
+
+                          if (res.result == 'so far') {  //返回距离过远
+                            wx.showModal({
+                              title: '操作失败',
+                              content: '当前位置距离讲座太远，无法进行签到',
+                              succee: {},
+                              fail: err => { }
+                            })
+                          } else if (res.result == 'fail') {  //写入数据库失败
+                            wx.showModal({
+                              title: '操作失败',
+                              content: '签到失败，请检查网络设置或稍后重试',
+                              succee: res=> {},
+                              fail: err => { }
+                            })
+                          } else {  //签到成功
+                            wx.showModal({
+                              title: '操作成功',
+                              content: '已完成签到',
+                              success: res => { },
+                              fail: err => { }
+                            })
+                          }
+                        },
+                        fail: err => {
+                          wx.hideLoading();
+                          console.log(err);
+                        }
+                      })
+                    },
+                    fail: function () {  //获取地理位置失败
+                      wx.getSetting({
+                        success: function (res) {
+                          var statu = res.authSetting;
+                          if (!statu['scope.userLocation']) {
+                            wx.showModal({
+                              title: '是否授权当前位置',
+                              content: '需要获取您的地理位置，请确认授权，否则地图功能将无法使用',
+                              success: function (tip) {
+                                console.log(1)
+                                if (tip.confirm) {
+                                  console.log(1)
+                                  wx.openSetting({
+                                    success: function (data) {
+                                      if (data.authSetting["scope.userLocation"] === true) {
+                                        wx.showToast({
+                                          title: '授权成功',
+                                          icon: 'success',
+                                          duration: 1000
+                                        })
+                                        wx.getLocation({
+                                          success(res) {
+                                            that.setData({
+                                              currentLon: res.longitude,
+                                              currentLat: res.latitude,
+                                            });
+                                          },
+                                        });
+                                      } else {
+                                        wx.showToast({
+                                          title: '授权失败',
+                                          icon: 'loading',
+                                          duration: 1000
+                                        })
+                                        wx.navigateBack({
+                                          delta: -1
+                                        });
+                                      }
+                                    }
+                                  })
+                                } else {
+                                  wx.navigateBack({
+                                    delta: -1
+                                  });
+                                }
+                              }
+                            })
+                          }
+                        },
+                        fail: function (res) {
+                          wx.showToast({
+                            title: '调用授权窗口失败',
+                            icon: 'success',
+                            duration: 1000
+                          })
+                          wx.navigateBack({
+                            delta: -1
+                          });
+                        }
+                      })
+                    }
+                  })
+                }
+              }
+            })
+          }
+        }
+      })
+    }
+  },
+
+  all: function () {
+    this.setData({
+      bgcolor1: "gainsboro",
+      bgcolor2: "white",
+      ismine: false
+    });
+    this.showAll();
+  },
+
+  mine: function () {
+    this.setData({
+      bgcolor1: "white",
+      bgcolor2: "gainsboro",
+      ismine: true
+    }),
+    this.showMine();
+  },
+
 })

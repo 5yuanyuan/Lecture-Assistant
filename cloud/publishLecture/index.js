@@ -30,7 +30,10 @@ exports.main = async (event, context) => {
         'introduction': introduction,
         'lecturetype': "unjoinLecture",
         'fileID': fileID,
-        'available':false
+        'available':false,
+        'location': {},
+        'signedList': [],
+        'joinList': []
       }
     }).then(res => {
       console.log(res);

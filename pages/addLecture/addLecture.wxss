@@ -1,3 +1,75 @@
+.bg {
+  position: relative;
+  height: 800rpx;
+  width: 100%;
+  margin-top: 60rpx;
+  border-color: #ff7200;
+  /* background: #fff4eb; */
+  color: #ff7200;
+  font-size: 33rpx;
+}
+.sub-tittle {
+  position: relative;
+  text-align: justify;
+  margin-top: 80rpx;
+  left: 290rpx;
+}
+.tit {
+  position: relative;
+  text-align: center;
+  height: 80rpx;
+  width: 600rpx;
+  font-size: 45rpx;
+  top: 20rpx;
+  left: 80rpx;
+  border-color: #ff7200;
+  background: #fff4eb;
+  color: #ff7200;
+  border-radius: 100rpx;
+}
+.sub-tit {
+  position: relative;
+  text-align: center;
+  color: #ff7200;
+  border-radius: 100rpx;
+  border: 3rpx #ff7200 solid;
+  left: 100rpx;
+  height: 60rpx;
+  width: 500rpx;
+}
+.sub-detail {
+  position: relative;
+  text-align: center;
+  color: #ff7200;
+  border-radius: 100rpx;
+  border: 3rpx #ff7200 solid;
+  margin-top: 100rpx;
+  height: 60rpx;
+  width: 500rpx;
+  left: 95rpx;
+}
+.simple-introduction {
+  position: relative;
+  margin-top: 140rpx;
+  border: 3rpx #ff7200 solid;
+  left: 65rpx;
+}
+.up {
+  position: relative;
+  text-align: center;
+  color: #ff7200;
+  top: 30rpx;
+  left: 5rpx;
+  width: 500rpx;
+  background-color: #fff4eb;
+  border: 5rpx #ff7200 solid;
+  border-radius: 100rpx;
+}
+.detail {
+  position: relative;
+  text-align: center;
+  top: 30rpx;
+}
 .show-btn {
   margin-top: 100rpx;
   color: #22cc22;

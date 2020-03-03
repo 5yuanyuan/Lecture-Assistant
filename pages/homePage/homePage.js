@@ -184,7 +184,7 @@ Page({
     }
   },
 
-  onview:function(e){
+  onview:function(e) {
     var index = e.currentTarget.dataset.index;
     var str = 'lectures[' + index + '].isOnShowDetail';
     this.setData({
@@ -202,7 +202,7 @@ Page({
     console.log("out it");
   },
 
-  onPullDownRefresh:function(){
+  onPullDownRefresh:function() {
     this.onLoad();
   }
 })
