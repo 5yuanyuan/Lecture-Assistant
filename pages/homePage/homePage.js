@@ -10,6 +10,10 @@ Page({
   },
   
   onLoad: function (options) {
+    console.log(app.globalData.openid);
+    wx.setNavigationBarTitle({
+      title: "学生主页"
+    })
     wx.showLoading({
       title: '加载中...',
       mask:true

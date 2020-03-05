@@ -7,6 +7,9 @@ Page({
   },
 
   onLoad: function(options) {
+    wx.setNavigationBarTitle({
+      title: "我发表的"
+    })
     wx.showLoading({
       title: '加载中...',
       mask:true
@@ -35,10 +38,10 @@ Page({
             })
             console.log(result);
             if(result) {
-              it.url = "../ask/goodAfterChoose.png";
+              it.url = "../../images/goodAfterChoose.png";
               it.isGood = true;
             } else {
-              it.url = "../ask/good.png";
+              it.url = "../../images/good.png";
               it.isGood = false;
             }
           })

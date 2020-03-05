@@ -1,57 +1,113 @@
-const db = wx.cloud.database()
-const locationCollection = db.collection('location')
+const app = getApp();
 Page({
   data: {
-    addmissage: '选的位置',
-    // markers	 Array	标记点
-    stitle: '',
-    latitude: "",
-    longitude: "",
-    scale: 14,
-    markers: [],
-    //左下图标归位
-    controls: [{
-      id: 1,
-      iconPath: 'ctrl0.png',
-      position: {
-        left: 15,
-        top: 260 - 50,
-        width: 40,
-        height: 40
-      },
-      clickable: true
-    }],
-    distanceArr: []
+    show_bt: !1,
+    show_img: !0,
+    userInfo: {},
+    latitude: '',
+    longitude: '',
   },
 
-  onLoad: function (options) {
-    var that = this
-    //获取当前的地理位置、速度
-    wx.getLocation({
-      type: 'wgs84', // 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标
-      success: function (res) {
-        //赋值经纬度
-        that.setData({
-          latitude: res.latitude,
-          longitude: res.longitude,
+  onLoad: function(t) {
+    var that = this;
+    if (app.globalData.userInfo) {
+      console.log(app.globalData.userInfo);
+      this.setData({
+        show_bt: true,
+        show_img: false, //头像显示
+        userInfo: app.globalData.userInfo,
+      })
+    } else if (this.data.canIUse) {
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          show_bt: true,
+          show_img: false, //头像显示
+          userInfo: res.userInfo,
+          hasUserInfo: true
         })
       }
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            show_bt: true,
+            show_img: false, //头像显示
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
+    }
+
+    wx.getLocation({
+      success: function(res) {
+        that.setData({
+          longitude: res.longitude,
+          latitude: res.latitude
+        })        
+      },
     })
   },
-  
-  //controls控件的点击事件
-  bindcontroltap(e) {
+
+  onGotUserInfo: function(e) {
     var that = this;
-    if (e.controlId == 1) {
-      that.setData({
-        latitude: this.data.latitude,
-        longitude: this.data.longitude,
-        scale: 14,
+    void 0 != e.detail.userInfo && (that.setData({
+      show_bt: !0,
+      show_img: !1,
+      userInfo: e.detail.userInfo
+    }),
+    wx.setStorageSync("userNick", e.detail.userInfo.nickName), 
+    wx.setStorageSync("avatarUrl", e.detail.userInfo.avatarUrl));
+    app.globalData.userInfo = e.detail.userInfo;
+  },
+
+  onShow: function(e) {
+    if (app.globalData.userInfo) {
+      this.setData({
+        show_bt: true,
+        show_img: false, //头像显示
+        userInfo: app.globalData.userInfo,
       })
     }
   },
-  //详情
-  onGuideTap: function (event) {
+
+  editMgs: function() {
+    if (app.globalData.userInfo) {
+      wx.navigateTo({
+        url: '../usermassage/usermassage',
+        success: function(res) {},
+        fail: function(res) {},
+        complete: function(res) {},
+      })
+    } else {
+      wx.showToast({
+        title: '请先授权登录',
+        icon: 'none'
+      })
+    }
+  },
+
+  suggest: function() {
+    if (app.globalData.userInfo) {
+      wx.navigateTo({
+        url: '../suggest/suggest',
+        success: function(res) {},
+        fail: function(res) {},
+        complete: function(res) {},
+      })
+    } else {
+      wx.showToast({
+        title: '请先授权登录',
+        icon: 'none'
+      })
+    }
+  },
+
+  locationMgs: function(event) {
     var lat = Number(event.currentTarget.dataset.latitude);
     var lon = Number(event.currentTarget.dataset.longitude);
     var bankName = event.currentTarget.dataset.bankname;
@@ -65,9 +121,9 @@ Page({
       scale: 28
     })
   },
-  uplocation: function (event){
-    console.log(event);
-  }
-  
-
-})
+  onHide: function() {},
+  onUnload: function() {},
+  onPullDownRefresh: function() {},
+  onReachBottom: function() {},
+  onShareAppMessage: function() {}
+});

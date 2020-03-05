@@ -44,8 +44,8 @@ Page({
       }).get({
         success: res => {
           if (res.data.length != 0) {
-            var user = res.data[0];
-            if (password.trim() != user.password) {
+            var User = res.data[0];
+            if (password.trim() != User.password) {
               wx.hideLoading();
               wx.showToast({
                 title: '密码错误',
@@ -57,23 +57,50 @@ Page({
               //为homePage传递参数
               app.globalData.userID = that.data.userID;
               app.globalData.password = that.data.password;
-              app.globalData.NickName = user.NickName;
-
-              wx.showToast({
-                title: '登录成功',
-                icon: 'success',
-                duration: 1000
+              
+              wx.login({
+                success: function (res) {
+                  console.log(res)
+                  if (res.code) {
+                    console.log('通过login接口的code换取openid');
+                    wx.request({
+                      url: 'https://api.weixin.qq.com/sns/jscode2session',
+                      data: {
+                        //填上自己的小程序唯一标识
+                        appid: app.globalData.appid,
+                        //填上自己的小程序的 app secret
+                        secret: app.globalData.secret,
+                        grant_type: 'authorization_code',
+                        js_code: res.code
+                      },
+                      method: 'GET',
+                      header: { 'content-type': 'application/json' },
+                      success: function (openIdRes) {
+                        console.info("登录成功返回的openId：" + openIdRes.data.openid);
+                        app.globalData.openid = openIdRes.data.openid;
+                        wx.showToast({
+                          title: '登录成功',
+                          icon: 'success',
+                          duration: 1000
+                        })
+                        if (User.identify == 'student') {
+                          wx.switchTab({
+                            url: '../homePage/homePage'
+                          });
+                        } else {
+                          wx.redirectTo({
+                            url: '../teacherPage/teacherPage',
+                          })
+                        }
+                      },
+                      fail: function (error) {
+                        console.info("获取用户openId失败");
+                        console.info(error);
+                      }
+                    })
+                  }
+                }
               })
-
-              if (user.identify == 'student') {
-                wx.switchTab({
-                  url: '../homePage/homePage'
-                });
-              } else {
-                wx.redirectTo({
-                  url: '../teacherPage/teacherPage',
-                })
-              }
             }
           } else {
             wx.showToast({
@@ -87,7 +114,7 @@ Page({
     }
   },
 
-  onShow: function() {
-    this.onLoad();
+  onLoad: function() {
+   
   }
 })

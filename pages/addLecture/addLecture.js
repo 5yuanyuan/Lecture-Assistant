@@ -7,17 +7,38 @@ Page({
     author: '',  //讲师姓名
     authorID: '', //讲师账号
     address: '', //讲座地点
-    year: '',  //年
-    month: '', //月
-    day: '',  //日
+    dateValue: '预约日期', //讲座时间
     introduction: '',  //讲座简介
     chooseFile: false,  //是否选择文件
     fileType:'',  //文件类型的后缀
     filePath:'',  //文件临时路径
     url: '',  //文件类型对应相应的图标
-    showModel:false
+    showModel:false,
+    tomorrow: ''
   },
 
+  onLoad: function() {
+    wx.setNavigationBarTitle({
+      title: "发表讲座"
+    })
+    var day = new Date();
+    console.log(day);
+    day.setTime(day.getTime() + 24 * 60 * 60 * 1000);
+    console.log(day);
+    var year = day.getFullYear();
+    var mon = day.getMonth() + 1;
+    var day = day.getDate();
+
+    if (mon < 10)
+      mon = '0' + mon;
+    if (day < 10)
+      day = '0' + day;
+    var tomorrow = year + "-" + mon + "-" + day;
+
+    this.setData({
+      tomorrow: tomorrow
+    })
+  },
   //获取讲座名称
   titleInput: function (e) {
     this.setData({
@@ -44,27 +65,6 @@ Page({
   addressInput: function (e) {
     this.setData({
       address: e.detail.value.trim()
-    })
-  },
-
-  //获取讲座年份
-  yearInput: function (e) {
-    this.setData({
-      year: e.detail.value
-    })
-  },
-
-  //获取月份
-  monthInput: function (e) {
-    this.setData({
-      month: e.detail.value
-    })
-  },
-
-  //获取日期
-  dayInput: function (e) {
-    this.setData({
-      day: e.detail.value.trim()
     })
   },
 
@@ -98,42 +98,78 @@ Page({
             chooseFile: true,
             fileType:".doc",
             filePath: filePath,
-            url: "WORD.png"
+            url: "../../images/WORD.png"
+          })
+          wx.showToast({
+            title: '选择成功！',
+            icon: 'success',
+            mask: true,
+            duration: 1000
           })
         } else if (filename.indexOf(".xls") != -1) {
           that.setData({
             chooseFile: true,
             fileType: ".xlsx",
             filePath:filePath,
-            url: "EXCEL.png"
+            url: "../../images/EXCEL.png"
+          })
+          wx.showToast({
+            title: '选择成功！',
+            icon: 'success',
+            mask: true,
+            duration: 1000
           })
         } else if (filename.indexOf(".ppt") != -1) {
           that.setData({
             chooseFile: true,
             fileType: ".ppt",
             filePath: filePath,
-            url: "PPT.png"
+            url: "../../images/PPT.png"
+          })
+          wx.showToast({
+            title: '选择成功！',
+            icon: 'success',
+            mask: true,
+            duration: 1000
           })
         } else if (filename.indexOf(".pdf") != -1) {
           that.setData({
             chooseFile: true,
             fileType: ".pdf",
             filePath: filePath,
-            url: "PDF.png"
+            url: "../../images/PDF.png"
+          })
+          wx.showToast({
+            title: '选择成功！',
+            icon: 'success',
+            mask: true,
+            duration: 1000
           })
         } else if (filename.indexOf(".txt") != -1) {
           that.setData({
             chooseFile: true,
             fileType: ".txt",
             filePath: filePath,
-            url: "TXT.png"
+            url: "../../images/TXT.png"
+          })
+          wx.showToast({
+            title: '选择成功！',
+            icon: 'success',
+            mask: true,
+            duration: 1000
           })
         } else if (filename.indexOf(".jpg") != -1 || filename.indexOf(".png") != -1) {
           that.setData({
             chooseFile: true,
             fileType: ".png",
             filePath: filePath,
-            url: "image.png"
+            url: "../../images/image.png"
+          })
+          wx.showToast({
+            title: '选择成功！',
+            icon: 'success',
+            mask: true,
+            duration: 1000
           })
         } else {
           wx.showToast({
@@ -155,16 +191,13 @@ Page({
     var author = that.data.author;
     var authorID = app.globalData.userID;
     var address = that.data.address;
-    var year = that.data.year;
-    var month = that.data.month;
-    var day = that.data.day;
+    var dateValue = that.data.dateValue;
     var introduction = that.data.introduction;
     var chooseFile = that.data.chooseFile;
     var fileType = that.data.fileType;
     var filePath = that.data.filePath;
-    var date = year + '.' + month + '.' + day;
 
-    if (title == '' || author == '' || address == '' || year == '' || month == '' || day == '' || introduction == '') {  //如果未输入完整
+    if (title == '' || author == '' || address == '' || introduction == '') {  //如果未输入完整
       wx.showToast({
         title: '请完整输入！',
         icon: 'loading',
@@ -176,9 +209,9 @@ Page({
         icon: 'loading',
         duration: 500
       })
-    } else if (!that.judgeDate(year,month,day)) { //检查日期是否正确输入
+    } else if (!that.data.dateValue == '预约日期') { //检查日期是否正确输入
       wx.showToast({
-        title: '日期输入有误！',
+        title: '请预约日期！',
         icon: 'loading',
         duration: 500
       })
@@ -202,7 +235,7 @@ Page({
               author: author,
               authorID: authorID,
               address: address,
-              date: date,
+              date: dateValue,
               introduction: introduction,
               fileID: fileID
             },
@@ -235,31 +268,27 @@ Page({
       })
     }
   },
-  
-
-  /**
-   * 判断日期是否合法
-   */
-  judgeDate: function (year, month, day) {
-    if (isNaN(year) || isNaN(month) || isNaN(day)) return false;
-    if (year < 2020 || year > 2100) return false;
-    if (month > 12 || month < 1) return false;
-    if (day > 31 || day < 1) return false;
-    if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30) return false;
-    if ((month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) && day > 31) return false;
-    if (month == 2) {
-      if (day > 29) return false;
-      if (!(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0)) && day > 28) return false;
-    }
-    return true;
-  },
 
   /**
    * 弹窗
    */
   showDialogBtn: function () {
-    this.setData({
-      showModal: true
+    // this.setData({
+    //   showModal: true
+    // })
+    var that = this;
+    wx.showModal({
+      title: '发表',
+      content: '确定发表该讲座吗？',
+      success: res=> {
+        if (res.confirm) {
+          that.submit();
+        } else {
+          /**
+           * 用户选择取消
+           */
+        }
+      }
     })
   },
   /**
@@ -287,5 +316,11 @@ Page({
   onConfirm: function () {
     this.hideModal();
     this.submit();
+  },
+
+  datePickerBindchange: function (e) {
+    this.setData({
+      dateValue: e.detail.value,
+    })
   }
 })

@@ -97,6 +97,20 @@
 					"id": -1,
 					"name": "提交讲座",
 					"pathName": "pages/addLecture/addLecture",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "反馈意见",
+					"pathName": "pages/suggest/suggest",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "关于讲座",
+					"pathName": "pages/about/about",
 					"scene": null
 				}
 			]

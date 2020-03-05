@@ -12,9 +12,10 @@ exports.main = async (event, context) => {
   var longitude = event.longitude;
   var lectureID = event.lectureID;
   var userID = event.userID;
+  var openid = event.openid;
 
   var operate = '';
-  var obj = {'userID':userID};
+  var obj = {'userID':userID, 'openid':openid};
   var obj2 = {'lectureID':lectureID};
 
   try {

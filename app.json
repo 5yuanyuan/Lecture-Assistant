@@ -9,7 +9,10 @@
     "pages/addLecture/addLecture",
     "pages/teacherPage/teacherPage",
     "pages/signedList/signedList",
-    "pages/teacherComments/teacherComments"
+    "pages/teacherComments/teacherComments",
+    "pages/myLocation/myLocation",
+    "pages/suggest/suggest",
+    "pages/about/about"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -25,26 +28,26 @@
       {
         "pagePath": "pages/homePage/homePage",
         "text": "我的主页",
-        "iconPath": "pages/homePage/my.png",
-        "selectedIconPath": "pages/homePage/mySelect.png"
+        "iconPath": "images/my.png",
+        "selectedIconPath": "images/mySelect.png"
       },
       {
         "pagePath": "pages/join/join",
         "text": "我的讲座",
-        "iconPath": "pages/homePage/lecture.png",
-        "selectedIconPath": "pages/homePage/lectureSelect.png"
+        "iconPath": "images/lecture.png",
+        "selectedIconPath": "images/lectureSelect.png"
       },
       {
         "pagePath": "pages/myAsk/myAsk",
         "text": "我的提问",
-        "iconPath": "pages/homePage/ask.png",
-        "selectedIconPath": "pages/homePage/askSelect.png"
+        "iconPath": "images/ask.png",
+        "selectedIconPath": "images/askSelect.png"
       },
       {
         "pagePath": "pages/set/set",
         "text": "设置",
-        "iconPath": "pages/homePage/set.png",
-        "selectedIconPath": "pages/homePage/setSelect.png"
+        "iconPath": "images/set.png",
+        "selectedIconPath": "images/setSelect.png"
       }
     ]
   },

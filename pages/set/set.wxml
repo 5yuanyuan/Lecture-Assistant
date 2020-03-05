@@ -1,24 +1,36 @@
-<!--pages/map/map.wxml-->
- <button bindtap="setDisabled" bindtap="uplocation">上传位置</button>
-<!-- 这是地图部分 -->
- 
-<view class="map_container">
-  <map class='map' longitude='{{longitude}}' latitude='{{latitude}}' scale='{{scale}}' markers='{{markers}}' controls="{{controls}}" bindcontroltap="bindcontroltap" polyline='{{polyline}}' circles="{{circles}}" bindmarkertap='bindmarkertap' bindcontroltap='bindcontroltap'
-    show-location></map>
-</view>
- 
- 
-<!-- 以下是导航部分 -->
- 
-<view class='list-guide'>
-
-  <view bindtap="onGuideTap" data-latitude='30.614576389' data-longitude='104.120306968' data-bankName='讲座地点'>
-    <image src='/images/banklist/daohang.png' class='list-guide-imgae'></image>
-    <text class='list-guide-text'>详情</text>
+<view>
+  <view class="fenge"></view>
+  <view class="login">
+    <button bindgetuserinfo="onGotUserInfo" hidden="{{show_bt}}" openType="getUserInfo" type="primary">登录授权</button>
   </view>
-  <view bindtap='onbankTap' data-bankId="{{item.BANK_ID}}">
-    <image src='/images/banklist/xiangqing.png' class='list-guide-imgae'></image>
-   
+  <view class="person_content">
+    <view>
+      <image class="person_image" hidden="{{show_img}}" src="{{userInfo.avatarUrl}}"></image>
+    </view>
   </view>
- 
+  <view class="name">
+    <text>{{userInfo.nickName}}</text>
+  </view>
+  <view class="fenge1"></view>
+  <view class="person_item">
+    <view class="text_image" bindtap='locationMgs' data-latitude='{{latitude}}' data-longitude='{{longitude}}' data-bankName='讲座地点'>
+      <image class="png" src="../../images/usermgs.png"></image>
+      <text>我的位置</text>
+      <image class="in" src="../../images/in.png"></image>
+    </view>
+    <view class="fenge2"></view>
+    <view class="text_image" bindtap='suggest'>
+      <image class="png" src="../../images/message.png"></image>
+      <text>提点建议</text>
+      <image class="in" src="../../images/in.png"></image>
+    </view>
+    <view class="fenge2"></view>
+    <navigator hoverClass="navigator-hover" url="../about/about">
+      <view class="text_image">
+        <image class="png" src="../../images/about.png"></image>
+        <text>关于助手</text>
+        <image class="in" src="../../images/in.png"></image>
+      </view>
+    </navigator>
+  </view>
 </view>

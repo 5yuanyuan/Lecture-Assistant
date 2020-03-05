@@ -1,4 +1,4 @@
-<image src="add.png" class='image' bindtap="addLecture"></image>
+<image src="../../images/add.png" class='image' bindtap="addLecture"></image>
 
 <view wx:for="{{myLectures}}" wx:key="key">
   <view><text>{{item.title}}</text></view>

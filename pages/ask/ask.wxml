@@ -22,7 +22,7 @@
   <view class="comment" wx:for="{{myComments}}" wx:for-index="index" wx:key='key'>
     <view class="name">{{item.NickName}}</view>
     <view class="time">{{item.time}}</view>
-    <view class="goodNumber" wx:if="{{item.goodNumber}}">{{item.goodNumber}}👍</view>
+    <view class="goodNumber" wx:if="{{item.goodNumber}}">{{item.goodNumber}}🔥</view>
     <image catchtap="change" src="{{item.url}}" class="good" data-commentid='{{item.commentID}}' data-index='{{index}}'>
   mode="aspectFill"    </image>
     <view>{{item.content}}</view>

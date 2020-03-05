@@ -1,5 +1,5 @@
 <view>
-  <image class="img" src="book.png"></image>
+  <image class="img" src="../../images/book.png"></image>
 </view>
 <view class="tittle">讲座小助手</view>
 <view>

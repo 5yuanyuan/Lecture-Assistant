@@ -18,6 +18,9 @@ Page({
 
   //页面初始化
   onLoad: function (options) {
+    wx.setNavigationBarTitle({
+      title: "讲座详情"
+    })
     var that = this;
     var id = options.id;     //讲座id
     var lecturetype = options.lecturetype; //讲座类型
@@ -66,17 +69,17 @@ Page({
                 console.log(likeCommentIDList.indexOf(item.commentID));
                 //如果点赞列表里存在该评论
                 if (likeCommentIDList.indexOf(item.commentID) > -1) {
-                  item.url = 'goodAfterChoose.png';
+                  item.url = '../../images/goodAfterChoose.png';
                   item.isGood = true;
                 } else {
-                  item.url = 'good.png';
+                  item.url = '../../images/good.png';
                   item.isGood = false;
                 }
                 console.log(item);
               })
             } else {  //如果没有用户点赞的评论
               comments.forEach(item => {
-                item.url = 'good.png';
+                item.url = '../../images/good.png';
                 item.isGood = false;
                 console.log(item);
               })
@@ -151,12 +154,12 @@ Page({
     
     if (!commentList[index].isGood) {  //没有被点赞
       commentList[index].goodNumber += 1;
-      commentList[index].url = 'goodAfterChoose.png';
+      commentList[index].url = '../../images/goodAfterChoose.png';
       commentList[index].isGood = true;
       tag = 1;
     } else {   //取消点赞
       commentList[index].goodNumber -= 1;
-      commentList[index].url = 'good.png';
+      commentList[index].url = '../../images/good.png';
       commentList[index].isGood = false;
       tag = -1;
     }
@@ -249,6 +252,7 @@ Page({
     var id = that.data.id;
     var lecturetype = that.data.lecturetype;
     var userID = app.globalData.userID;
+    var openid = app.globalData.openid;
 
     if (lecturetype == 'joinedLecture') {
       wx.showModal({
@@ -263,15 +267,20 @@ Page({
         mask: true
       });
       
-      db.collection('users').where({
-        'userID': userID
+      db.collection('lectures').where({
+        '_id': id
       }).get({
         success: res=> {
-          var mySigns = res.data[0].mySigns;
+          var signedList = res.data[0].signedList;
           var flag = false;
-          for (var i = 0; i < mySigns.length ;i++) { //判断是否完成签到
-            if (mySigns[i].lectureID == id) {
+          var flag2 = false;
+          for (var i = 0; i < signedList.length ;i++) { //判断是否完成签到
+            if (signedList[i].userID == userID) {
               flag = true;
+              break;
+            }
+            if (signedList[i].openid == openid) {
+              flag2 = true;
               break;
             }
           }
@@ -280,6 +289,12 @@ Page({
             wx.showModal({
               title: '操作失败',
               content: '请勿重复签到！',
+            })
+          } else if (flag2) {  //检测是否为同一微信号签到
+            wx.hideLoading();
+            wx.showModal({
+              title: '操作失败',
+              content: '每个微信账号只能签到一次！',
             })
           } else {  //发起签到请求
             db.collection('lectures').where({
@@ -315,7 +330,8 @@ Page({
                           latitude: res.latitude,
                           longitude: res.longitude,
                           lectureID: id,
-                          userID: userID
+                          userID: userID,
+                          openid: openid
                         },
                         success: res => {
                           wx.hideLoading();

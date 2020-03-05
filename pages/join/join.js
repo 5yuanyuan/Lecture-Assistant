@@ -14,6 +14,9 @@ Page({
   },
 
   onLoad: function (options) {
+    wx.setNavigationBarTitle({
+      title: "我参与的"
+    })
     wx.showLoading({
       title: 'loading...',
       mask:true

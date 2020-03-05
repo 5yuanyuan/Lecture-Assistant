@@ -1,6 +1,6 @@
 <view class="unjoin">未开始的讲座</view>
 <view class='unjoinLecture' wx:for='{{unjoinLec}}' wx:key='key'>
-  <image src='unjoin.png' class='image'></image>
+  <image src='../../images/unjoin.png' class='image'></image>
   <text class="tittle">{{item.title}}</text>
   <view>
     <text class="author">{{item.author}}\n\n</text>
@@ -10,18 +10,18 @@
     <button class="files" bindtap="download_File" data-fileid="{{item.fileID}}" data-lecturetype="{{item.lecturetype}}">资料下载</button>
   </view>
   <view>
-    <image src="time.png" class="imageDate"></image>
+    <image src="../../images/time.png" class="imageDate"></image>
     <text class="date">{{item.date}}</text>
   </view>
   <view>
-    <image src="pos.png" class="imagePos"></image>
+    <image src="../../images/pos.png" class="imagePos"></image>
     <text class="pos">{{item.address}}</text>
   </view>
 </view>
 
 <view class="join">已结束的讲座</view>
 <view class="joinLecture" wx:for='{{joinedLec}}' wx:key='key'>
-  <image src='join.png' class='image'></image>
+  <image src='../../images/join.png' class='image'></image>
   <text class="tittle">{{item.title}}</text>
   <view>
     <text class="author">{{item.author}}\n\n</text>
@@ -31,11 +31,11 @@
     <button class="files" bindtap="download_File" data-fileid="{{item.fileID}}" data-lecturetype="{{item.lecturetype}}">资料下载</button>
   </view>
   <view>
-    <image src="time.png" class="imageDate"></image>
+    <image src="../../images/time.png" class="imageDate"></image>
     <text class="date">{{item.date}}</text>
   </view>
   <view>
-    <image src="pos.png" class="imagePos"></image>
+    <image src="../../images/pos.png" class="imagePos"></image>
     <text class="pos">{{item.address}}</text>
   </view>
 </view>

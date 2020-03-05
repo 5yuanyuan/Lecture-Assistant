@@ -25,12 +25,17 @@ App({
     var minute = today.getMinutes();
     var second = today.getSeconds();
 
-    if (hour.length == 1)
+    if (month < 10)
+      month = '0' + month;
+    if (day < 10)
+      day = '0' + day;
+    if (hour < 10)
       hour = '0' + hour;
-    if (minute.length == 1)
+    if (minute < 10)
       minute = '0' + minute;
-    if (second.length == 1)
+    if (second < 10)
       second = '0' + second;
+      
 
     return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
   },
@@ -39,9 +44,12 @@ App({
   globalData: {
     userInfo: null,
     userID: '',   //使用者账号
+    openid: '',   //使用者openid
     password: '',  //密码
     NickName:'',  //使用者昵称
     identify: '',  //使用者身份
+    appid: 'wx92af32bb0e7fb9a3',
+    secret: '60cf4635063803a5e2bee7d08ff16732',
   },
 
   //生成唯一ID
