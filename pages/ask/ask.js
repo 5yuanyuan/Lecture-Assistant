@@ -14,6 +14,7 @@ Page({
     bgcolor2: "white",
     bgcolor3: "rgba(255, 144, 0, .2)",
     ismine: false,
+    value: ''
   },
 
   //页面初始化
@@ -135,7 +136,8 @@ Page({
 
   questionInput: function (e) {
     this.setData({
-      question: e.detail.value
+      question: e.detail.value,
+      value: e.detail.value
     })
   },
 
@@ -208,40 +210,55 @@ Page({
         duration: 500
       })
     } else {
-      wx.showLoading({
-        title: '正在发表',
-        mask:true
-      })
-      //将提问添加到数据库中
-      var content = this.data.question;
-      var askerID = app.globalData.userID;
-      var NickName = app.globalData.NickName;
-      console.log(app.globalData.userID);
+      wx.showModal({
+        title: '提示',
+        content: '确认发表提问吗？',
+        success: res=> {
+          if (res.confirm) {
+            wx.showLoading({
+              title: '正在发表...',
+              mask: true
+            })
+            //将提问添加到数据库中
+            var content = this.data.question;
+            var askerID = app.globalData.userID;
+            var NickName = app.globalData.NickName;
+            console.log(app.globalData.userID);
 
-      wx.cloud.callFunction({
-        name: 'submitComment',
-        data: {
-          id: that.data.id,
-          asker: askerID,
-          content: content,
-          time: app.getTime(),
-          commentID: app.guid(),
-          NickName: NickName
-        },
-        success: res => {
-          console.log("提交", res);
-          // 这里修改成跳转的页面
-          wx.hideLoading();
+            wx.cloud.callFunction({
+              name: 'submitComment',
+              data: {
+                id: that.data.id,
+                asker: askerID,
+                content: content,
+                time: app.getTime(),
+                commentID: app.guid(),
+                NickName: NickName
+              },
+              success: res => {
+                console.log("提交", res);
+                // 这里修改成跳转的页面
+                wx.hideLoading();
 
-          wx.showToast({
-            title: '提交成功',
-            icon: 'success',
-            duration: 500
-          })
-          
-          that.mine();
+                wx.showToast({
+                  title: '提交成功',
+                  icon: 'success',
+                  duration: 500
+                })
+                that.setData({
+                  value: ''
+                })
+                that.mine();
+              }
+            })
+          } else {
+            /**
+             * 用户选择取消
+             */
+          }
         }
       })
+
     }
   },
   /**

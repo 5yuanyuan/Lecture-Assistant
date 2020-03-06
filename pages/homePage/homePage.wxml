@@ -8,7 +8,7 @@
     <text class="author">{{item.author}}\n\n</text>
   </view>
   <view>
-    <button class="detail" bind:touchstart="onview" bind:touchend="outview" data-index="{{index}}">简介</button>
+    <button class="detail" bindtap="showDetail" data-index="{{index}}">简介</button>
     <button class="join" bindtap="join" data-lectureid="{{item._id}}" data-lecturetype="{{item.lecturetype}}" data-title="{{item.title}}">报名</button>
   </view>
   <view>

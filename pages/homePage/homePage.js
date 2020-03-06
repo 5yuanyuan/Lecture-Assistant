@@ -11,6 +11,12 @@ Page({
   
   onLoad: function (options) {
     console.log(app.globalData.openid);
+    wx.getUserInfo({
+      success: res=> {
+        console.log(res);
+        app.globalData.NickName = res.userInfo.nickName;
+      }
+    })
     wx.setNavigationBarTitle({
       title: "学生主页"
     })
@@ -188,22 +194,14 @@ Page({
     }
   },
 
-  onview:function(e) {
+  showDetail: function(e) {
+    var that = this;
     var index = e.currentTarget.dataset.index;
+    var flag = !that.data.lectures[index].isOnShowDetail;
     var str = 'lectures[' + index + '].isOnShowDetail';
     this.setData({
-      [str]:true
+      [str]: flag
     })
-    console.log("on it");
-  },
-
-  outview:function(e){
-    var index = e.currentTarget.dataset.index;
-    var str = 'lectures[' + index + '].isOnShowDetail';
-    this.setData({
-      [str]: false
-    })
-    console.log("out it");
   },
 
   onPullDownRefresh:function() {

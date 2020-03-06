@@ -123,7 +123,7 @@ Page({
   },
   onHide: function() {},
   onUnload: function() {},
-  onPullDownRefresh: function() {},
+  onPullDownRefresh: function() {this.onLoad();},
   onReachBottom: function() {},
   onShareAppMessage: function() {}
 });

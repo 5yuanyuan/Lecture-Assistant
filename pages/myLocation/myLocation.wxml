@@ -12,7 +12,7 @@
  
 <view class='list-guide'>
 
-  <view bindtap="onGuideTap" data-latitude='30.614576389' data-longitude='104.120306968' data-bankName='讲座地点'>
+  <view bindtap="onGuideTap" data-latitude='30.614576389' data-longitude='104.120306968' data-bankName='查询讲座位置'>
     <text class='list-guide-text'>详情</text>
   </view>
   <view bindtap='onbankTap' data-bankId="{{item.BANK_ID}}">

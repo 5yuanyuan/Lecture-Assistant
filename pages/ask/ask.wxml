@@ -31,7 +31,7 @@
   <text>发起提问</text>
   </view>
   <view class="input">
-  <textarea class="inputBox" bindinput="questionInput" maxlength="140"></textarea>
+  <textarea class="inputBox" bindinput="questionInput" maxlength="140" value="{{value}}"></textarea>
   </view>
 
   <view>
