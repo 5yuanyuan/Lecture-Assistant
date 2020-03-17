@@ -48,7 +48,7 @@ Page({
   /**
    * 发起签到
    */
-  qiandao:function(event){
+  qiandao: function(event){
     var that = this;
     var lectureID = event.currentTarget.dataset.lectureid;
     var available = event.currentTarget.dataset.available;

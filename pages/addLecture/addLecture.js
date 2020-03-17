@@ -7,7 +7,7 @@ Page({
     author: '',  //讲师姓名
     authorID: '', //讲师账号
     address: '', //讲座地点
-    dateValue: '预约日期', //讲座时间
+    dateValue: '点击预约', //讲座时间
     introduction: '',  //讲座简介
     chooseFile: false,  //是否选择文件
     fileType:'',  //文件类型的后缀
@@ -209,7 +209,7 @@ Page({
         icon: 'loading',
         duration: 500
       })
-    } else if (!that.data.dateValue == '预约日期') { //检查日期是否正确输入
+    } else if (!that.data.dateValue == '点击预约日期') { //检查日期是否正确输入
       wx.showToast({
         title: '请预约日期！',
         icon: 'loading',

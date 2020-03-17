@@ -1,7 +1,7 @@
 <view class='showmine'>
-  <button style='background: {{bgcolor1}};' bindtap='all'>全部评论</button>
-  <button style='background: {{bgcolor3}};' bindtap='tosign'>签到</button>
-  <button style='background: {{bgcolor2}};' bindtap='mine'>我的提问</button>
+  <button class="allComment" bindtap='all'>全部评论</button>
+  <button class="signup" bindtap='tosign'>签到</button>
+  <button class="myQuestion" bindtap='mine'>发起提问</button>
 </view>
 
 <view wx:if="{{!ismine}}">

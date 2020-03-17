@@ -1,4 +1,3 @@
-/* pages/beizu/beizu.wxss */
 .conts {
   border: 1rpx soldi red;
   margin-left: 10px;
