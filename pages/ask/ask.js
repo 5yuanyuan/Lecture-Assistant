@@ -472,4 +472,7 @@ Page({
     this.showMine();
   },
 
+  takePho: function() {
+
+  },
 })

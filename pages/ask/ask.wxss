@@ -12,7 +12,14 @@
   color: #ff7200;
   background-color: #fff4eb;
 }
-myQuestion {
+.myQuestion {
+  position: relative;
+  text-align: center;
+  height: 100rpx;
+  color: #ff7200;
+  background-color: #fff4eb;
+}
+.takePhotos {
   position: relative;
   text-align: center;
   height: 100rpx;
